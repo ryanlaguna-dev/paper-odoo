@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ecv_custom_ecv_custom,ecv_custom.ecv_custom,model_ecv_custom_ecv_custom,,1,0,0,0
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ecv_custom_customer_tag,ecv_custom.customer_tag,model_ecv_custom_customer_tag,,1,0,0,0

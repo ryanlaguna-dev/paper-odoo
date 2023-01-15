@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_report_hold_customer" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <t t-if="doc.restrict_invoice">
+                <div class="col-xs-5" style="transform: rotate(15deg);">
+                    <h2 style="color: red;">
+                        HOLD CUSTOMER
+                    </h2>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

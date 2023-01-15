@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="customer_tag_account_invoice" model="ir.ui.view">
+        <field name="name">customer_tag_account_invoice</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="customer_tag" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="customer_tag_sale_quote" model="ir.ui.view">
+        <field name="name">customer_tag_sale_quote</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="customer_tag" />
+                <field name="package_count" />
+                <field name="dr_number" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

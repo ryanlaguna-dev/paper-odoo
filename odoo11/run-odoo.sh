@@ -1,0 +1,1 @@
+./odoo-bin -r odoo_admin -w odooadminpassword --addons-path=addons,../odoo11-custom-addons,Projects --db_host=127.0.0.1 --log-handler=odoo:DEBUG

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="paper_soa.paper_soa_document">
+        <t t-call="web.external_layout">
+            <div class="page" style="font-size: 15">
+                <t t-set="total" t-value="0" />
+                <t t-set="inv" t-value="o.get_data()" />
+                <div class="row" style="margin: 0px !important;">
+                    <div class="col-xs-2">
+                        <img src='/paper_soa/static/src/img/logo-ecv.png' />
+                    </div>
+                    <div class="col-xs-7-offset-1 text-center">
+                        <h3>
+                            <b>ECV OFFICE SUPPLIES WAREHOUSE INC</b>
+                        </h3>
+                        <p>
+                            68 Villamor St. Bo. Obrero Davao City
+                            <br />
+                            Contact Number : (082) 227-0826 ; (082) 225-7451 ; (082) 225-7402
+                        </p>
+                    </div>
+                    <h2 class="text-center">STATEMENT OF ACCOUNT</h2>
+                    <div class="col-xs-4 col-xs-offset-8 text-left">
+                        <b> SOA #: _____________</b>
+                    </div>
+                    <div class="col-xs-4 col-xs-offset-8 text-left">
+                        <b>STATEMENT DATE:</b>
+                        <span t-esc="o.get_current_date()" />
+                    </div>
+                </div>
+                <div class="row text-center" style="margin-top: 0px;">
+                    <h2>
+                        <b>
+                            <span t-esc="o.name" />
+                        </b>
+                    </h2>
+                    <span t-esc="o.street2" />
+                </div>
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <td width="15%" class="text-center">
+                                <strong>Invoice Date </strong>
+                            </td>
+                            <td class="text-center">
+                                <strong>Invoice No. </strong>
+                            </td>
+                            <td width="25%" class="text-center">
+                                <strong>Purchase Order </strong>
+                            </td>
+                            <td class="text-center">
+                                <strong>Amount </strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="inv" t-as="i">
+                            <tr class="text-center">
+                                <t t-if=" 'refund' in i.type">
+                                    <t t-set="total" t-value="total - i.residual" />
+                                </t>
+                                <t t-else="">
+                                    <t t-set="total" t-value="total + i.residual" />
+                                </t>
+                                <td width="15%" class="text-center">
+                                    <span t-esc="i.date_invoice" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="i.move_name" />
+                                </td>
+                                <td width="25%" class="text-center">
+                                    <span t-esc="i.name" />
+                                </td>
+                                <td class="text-center">
+                                    <b>
+                                        <t t-if=" 'refund' in i.type">-</t>
+                                        <span t-esc="i.amount_total" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}' />
+                                    </b>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td width="50%" class="text-center" colspan="2">
+                            <b>GRAND TOTAL</b>
+                        </td>
+                        <td width="50%" class="text-center">
+                            <b>
+                                <span t-esc="total" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}' />
+                            </b>
+                        </td>
+                    </tr>
+                </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p class="text-center">
+                            <i>                         
+The payment(s) for the above mentioned invoices has not been received By our office.  We will appreciate your remittance to our office or authorized collector in the soonest possible time.
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        Received Original Documents:
+                        <br />
+                        <br />
+                        <br />
+                        <p class="text-center">_____________________________________</p>
+                        <p class="text-center">
+                            Printed Name
+                            <span>&#38;</span>
+                            Signature(Date)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="statement_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="paper_soa.paper_soa_document" t-lang="o.lang" />
+            </t>
+        </t>
+    </template>
+
+    <report id="action_print_soa" model="res.partner" report_type="qweb-pdf" string="Print Statement of Account" name="paper_soa.statement_report" file="paper_soa.statement_report" />
+</odoo>

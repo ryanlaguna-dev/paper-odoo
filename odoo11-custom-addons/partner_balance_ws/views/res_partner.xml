@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    <record id="view_partner_form_inherit_customers_balance" model="ir.ui.view">
+            <field name="name">res.partner.view.customer.balance</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+	             <field name="category_id" position="after">
+	                <field name="partner_currency" invisible="1"/>
+                    <field name="balance_in_partner_currency" widget='monetary' options="{'currency_field': 'partner_currency'}" string="Customer Balance" attrs="{'invisible': ['|',('customer','!=',True),('parent_id','!=',False)]}"></field>
+                   	
+	          	</field>
+            </field>
+        </record>
+</data>
+</openerp>

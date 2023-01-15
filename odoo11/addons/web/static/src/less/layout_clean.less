@@ -1,0 +1,92 @@
+.o_clean_footer, .o_clean_header, .o_report_layout_clean {
+    font-family: 'Lato';
+    /*color: #000;*/
+    color: black;
+}
+.o_clean_header {
+    /*img {
+        max-height: 90px;
+        max-width: 300px;
+    }*/
+}
+.o_clean_footer {
+    /*margin: 0 3px;
+    border-top: none;
+    h4 {
+        color: black;
+        font-weight: bolder;
+    }*/
+    .pagenumber {
+        width: 35px;
+        height: 35px;
+        /*border: 3px solid black;*/
+        /*background-color: black;*/
+        color: white;
+        padding-top: 6px;
+        text-align: center;
+    }
+
+    .cashTotal{
+        font-weight: bold !important;
+        font-size: 20px !important;
+        text-align: right;
+        /*margin-left: : 24px !important;*/
+    }
+}
+.o_report_layout_clean {
+    h1, h2, h3 {
+        color: black;
+        font-weight: bolder;
+    }
+    strong {
+        color: black;
+    }
+    table {
+        thead{
+            /*color: black;*/
+            tr th {
+                text-align: left;
+                border-top: none !important;
+                border-bottom: none !important;
+                text-transform: uppercase;
+            }
+            tr th:last-child {
+                text-align: left;
+            }
+            tr th:first-child {
+                width: 10%%;
+            }
+        }
+        tbody {
+            color: #000;
+
+            tr {
+                    border-bottom: none !important;
+                    text-align: left !important;
+                    border-top: none !important;
+            }
+            td{
+                height: 15px;
+                border-top: none !important;
+                border-bottom: none !important;
+            }
+        }
+    }
+
+    
+    /*Total table*/
+    /*.row > .col-xs-4 {
+            width: 43%;
+            position: relative;
+            top: -20px;
+            > table {
+            tr:last-child td {
+                border-top: none;
+            }
+            tr:first-child td {*/
+                /*we could get rid of this rule if .border-black td would be terminated in report.less*/
+                /*border-top: none !important;
+            }
+        }
+    }*/
+}

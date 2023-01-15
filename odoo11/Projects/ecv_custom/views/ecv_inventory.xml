@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="ecv_custom_view_stock_quant_tree">
+            <field name="name">ecv_custom.stock.quant.tree</field>
+            <field name="model">stock.quant</field>
+            <field eval="10" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Inventory Valuation" create="0" delete="0" decoration-danger="quantity &lt; 0">
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="in_date"/>
+                    <field name="quantity" sum="Total On Hand" string="On Hand"/>
+                    <field name="product_uom_id"/>
+                    <field name="standard_cost" sum="Standard Cost Total"/>
+                    <field name="total_cost" sum="Total Computed Cost" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="ecv_custom_stock_quant_action"> <!-- Menu + python -->
+            <field name="name">Inventory</field>
+            <field name="res_model">stock.quant</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="ecv_custom_view_stock_quant_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_nocreate">
+                    The closings are created by Odoo
+                    </p><p>
+                    Creating stock quants are disabled
+                </p>
+            </field>
+        </record>
+        
+        <menuitem id="menu_ecv_inventory"
+        parent="stock.menu_stock_root" name="ECV" sequence="6"/>
+        
+        <menuitem id="menu_ecv_custom_stock_quant" name="Inventory" parent="menu_ecv_inventory" sequence="1" action="ecv_custom_stock_quant_action"/>
+        
+    </data>
+</odoo>

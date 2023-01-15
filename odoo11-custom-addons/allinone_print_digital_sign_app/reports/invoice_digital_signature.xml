@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Signature add in invoice and vendor bill pdf report -->
+        <template id="invoice_qweb_report" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[hasclass('clearfix')]/div[@id='total']" position="after">
+                <t t-if="o.type == 'out_invoice'">
+                    <t t-if="o.digital_sign_customer_invoice_compute">
+                        <t t-if="o.digital_signature">
+                            <div class="offset-8">
+                                <table style="float:right;">                           
+                                    <tr>
+                                        <td>                
+                                            <img t-att-src="'data:image/png;base64,%s' % to_text(o.digital_signature)" style="max-height: 6cm; max-width: 10.5cm; "/><br></br>
+                                            <strong>Signature</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+                <t t-if="o.type == 'in_invoice'">
+                    <t t-if="o.digital_sign_vendor_bill_compute">
+                        <t t-if="o.digital_signature">
+                            <div class="offset-8">
+                                <table style="float:right;">
+                                    <tr>
+                                        <td> 
+                                            <img t-att-src="'data:image/png;base64,%s' % to_text(o.digital_signature)" style="max-height: 6cm; max-width: 10.5cm;"/><br></br>
+                                            <strong>Signature</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

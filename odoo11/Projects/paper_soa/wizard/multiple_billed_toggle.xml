@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view of Merge Sale order -->
+    <record id="toggle_multiple_billed" model="ir.ui.view">
+        <field name="name">paper_soa.multiple_billed.form</field>
+        <field name="model">paper_soa.multiple_billed</field>
+        <field name="arch" type="xml">
+            <form string="Toggle Billed Status">
+                <separator string="Are you sure you want to toggle billed status for selected invoice/s?" />
+                <footer>
+                    <button name="toggle_billed_status" string="Yes" type="object"
+                        class="btn-primary" />
+                    <button string="No" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action of Merge Sale Order -->
+    <record id="action_view_toggle_multiple_billed" model="ir.actions.act_window">
+        <field name="name">Confirm Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">paper_soa.multiple_billed</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <act_window
+        id="action_view_multiple_confirm"
+        multi="True"
+        key2="client_action_multi"
+        name="Toggle Multiple Billed Status"
+        res_model="paper_soa.multiple_billed"
+        src_model="account.invoice"
+        view_mode="form"
+        target="new"
+        view_type="form"
+        view_id="toggle_multiple_billed" />
+
+</odoo>

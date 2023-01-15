@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+    <record id="account_payment_bir_reported" model="ir.ui.view">
+      <field name="name">account_payment_bir_reported</field>
+      <field name="model">account.payment</field>
+      <field name="inherit_id" ref="account.view_account_payment_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='payment_transaction_id']" position="after">
+          <field name="bir_reported" />
+        </xpath>
+      </field>
+    </record>
+    <record id="account_invoice_bir_reported" model="ir.ui.view">
+      <field name="name">account_invoice_bir_reported</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.invoice_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="bir_reported" />
+        </xpath>
+      </field>
+    </record>
+    <record id="account_supplier_bir_reported" model="ir.ui.view">
+      <field name="name">account_supplier_bir_reported</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.invoice_supplier_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='reference']" position="after">
+          <field name="bir_reported" />
+        </xpath>
+      </field>
+    </record>
+  </data>
+  <!-- <record id="supplier_bir_reported" model="ir.ui.view">
+    <field name="name">supplier_bir_reported</field>
+    <field name="model">account.payment</field>
+    <field name="inherit_id" ref="account.invoice_supplier_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='reference']" position="after">
+        <field name="bir_reported" />
+      </xpath>
+    </field>
+  </record> -->
+</odoo>

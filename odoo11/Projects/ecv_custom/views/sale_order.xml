@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="manifest_sale_order" model="ir.ui.view">
+        <field name="name">manifest_sale_order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='dr_number']" position="after">
+                <field name="manifest_image" invisible="1" />
+                <field name="manifest_image_file" filename="manifest_image" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

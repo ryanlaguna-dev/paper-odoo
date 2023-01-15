@@ -1,0 +1,41 @@
+<odoo>
+  <record id="sale_order_hold_customer" model="ir.ui.view">
+    <field name="name">sale.order.hold_customer</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='payment_term_id']" position="after">
+        <field name="restrict_invoice" invisible="1" />
+        <h3 attrs="{'invisible':[('restrict_invoice','=',False)]}" style="color: red;">HOLD CUSTOMER</h3>
+      </xpath>
+    </field>
+  </record>
+  <record id="invoice_tree_hold_at_customer" model="ir.ui.view">
+    <field name="name">invoice.tree.hold_at_customer</field>
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='partner_id']" position="after">
+        <field name="billed" />
+        <field name="delivered" />
+        <field name="warehouse" />
+        <field name="lacking" />
+      </xpath>
+    </field>
+  </record>
+  <record id="account_invoice_form_lacking_warehouse" model="ir.ui.view">
+    <field name="name">invoice.form.lacking_warehouse</field>
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='f_2307']" position="after">
+        <field name="lacking" />
+        <field name="delivery_receipt_image" invisible="1" attrs="{'required': [('lacking', '=', True)]}" />
+        <field name="delivery_receipt_image_file" filename="delivery_receipt_image" attrs="{'invisible':[('lacking','=',False)], 'required': [('lacking', '=', True)]}" />
+        <field name="warehouse" />
+        <field name="manifest_image" invisible="1" />
+        <field name="manifest_image_file" filename="manifest_image" />
+      </xpath>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <report id="deposit_slip_printing"
+            model="account.payment"
+            string="Deposit Slip"
+            name="paper_soa.deposit_slip"
+            file="paper_soa.deposit_slip"
+            print_report_name="'%s Deposit Slip' % (object.name)"
+        />
+    </data>
+
+    <template id="deposit_slip">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="paper_soa.deposit_slip_document" />
+            </t>
+        </t>
+    </template>
+
+    <template id="deposit_slip_document">
+        <t t-call="paper_soa.deposit_slip_external_layout">
+            <div>
+                <span style="font-weight: 900; letter-spacing: 5px;">589 7 58900368 0</span>
+                <br />
+                <span style="font-weight: 700;">ECV OFFICE SUPPLIES WAREHOUSE</span>
+                <br />
+                <br />
+                <span style="margin-left: 250px;" t-esc="context_timestamp(datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%m/%d/%y')" />
+            </div>
+        </t>
+    </template>
+
+
+    <template id="deposit_slip_external_layout">
+        <t t-call="paper_soa.deposit_slip_custom_layout">
+            <t t-raw="0" />
+        </t>
+    </template>
+
+
+    <template id="deposit_slip_custom_layout">
+        <div class="header o_clean_header">
+            <div class="row"></div>
+        </div>
+
+        <div class="article o_report_layout_clean">
+            <t t-raw="0" />
+        </div>
+        <div class="footer o_clean_footer" style="text-align: right;">
+            <span t-esc="o.cheque_reference" />
+            <span t-esc="o.amount" />
+            <br />
+            <br />
+            <span t-esc="'{0:,.2f}'.format(o.amount)" />
+        </div>
+    </template>
+
+
+</odoo>

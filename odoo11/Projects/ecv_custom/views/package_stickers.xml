@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="package_stickers_document">
+            <t t-call="ecv_custom.custom_external_layout">
+                <t t-foreach="range(o.package_count)" t-as="count">
+                    <div class="row" style="min-height: 380px;">
+                        <div class="text-center align-middle" style="height: 550px;font-size: 20px;">
+                            <img src='/ecv_custom/static/src/img/ECV_logo_2.jpg' style="max-height:130px;" />
+                            <div>
+                                <strong>
+                                    <span style="font-size: 30px;" t-esc="o.name" />
+                                </strong>
+                                <br />
+                                DR no.
+                                <strong>
+                                    <span t-esc="o.dr_number"></span>
+                                </strong>
+                                <br />
+                                To:
+                                <strong>
+                                    <span style="font-size: 30px;" t-esc="o.partner_id.name"></span>
+                                </strong>
+                                <br />
+                                <span t-esc="o.partner_id.street" />
+                                <br />
+                                <span t-esc="o.partner_id.street2" />
+                                <br />
+                                <span t-esc="o.partner_id.phone" />
+                                <br />
+                                <div style="font-size: 28px; margin-top:30px">
+                                    <strong>
+                                        <span t-esc="count + 1" />
+                                    </strong>
+                                    of
+                                    <span t-esc="o.package_count" />
+                                    packages
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="package_stickers">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="ecv_custom.package_stickers_document" />
+                </t>
+            </t>
+        </template>
+
+        <template id="custom_external_layout">
+            <t t-call="ecv_custom.custom_layout">
+                <t t-raw="0" />
+            </t>
+        </template>
+
+
+        <template id="custom_layout">
+            <div class="header o_clean_header">
+                <div class="row"></div>
+            </div>
+
+            <div class="article o_report_layout_clean">
+                <t t-raw="0" />
+            </div>
+            <div class="footer o_clean_footer" />
+        </template>
+    </data>
+</odoo>

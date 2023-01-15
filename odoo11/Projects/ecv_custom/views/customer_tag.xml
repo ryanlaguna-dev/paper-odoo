@@ -1,0 +1,109 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="customer_tag_tree">
+            <field name="name">customer_tag_tree</field>
+            <field name="model">ecv_custom.customer_tag</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="slug" />
+                    <field name="create_date" />
+                    <field name="write_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="customer_tag_form" model="ir.ui.view">
+            <field name="name">CustomerTag.form</field>
+            <field name="model">ecv_custom.customer_tag</field>
+            <field name="arch" type="xml">
+                <form string="Customer Tag" class="o_manifest_form">
+                    <sheet string="Customer Tag">
+                        <div class="oe_button_box" name="button_box"></div>
+                        <h1 class="mt0">
+                            <div>
+                                <field name="name" disabled="1" readonly="1" />
+                            </div>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="slug" readonly="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_customer_tag_tree" model="ir.actions.act_window">
+            <field name="name">Customer Tag</field>
+            <field name="res_model">ecv_custom.customer_tag</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">primary</field>
+            <field name="view_id" ref="customer_tag_tree" />
+        </record>
+
+        <record id="action_customer_tag_tree_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">tree</field>
+            <field name="act_window_id" ref="action_customer_tag_tree" />
+        </record>
+
+        <record id="action_customer_tag_tree_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="customer_tag_form" />
+            <field name="act_window_id" ref="action_customer_tag_tree" />
+        </record>
+
+        <record id="action_customer_tag_tree1" model="ir.actions.act_window">
+            <field name="name">List of Customer Tags</field>
+            <field name="res_model">ecv_custom.customer_tag</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field eval="False" name="view_id" />
+            <!--field name="domain">[('type','=','out_invoice')]</field>
+        <field name="context">{'type':'out_invoice', 'journal_type': 'sale'}</field-->
+            <!--field name="search_view_id" ref="view_account_invoice_filter"/-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+            Click to create a Storage Manifest.
+          </p>
+                <p>
+            Odoo's electronic Manifest allows to ease and fasten the
+            collection of Invoice/Delivery numbers.
+          </p>
+                <p>
+            Testing...
+          </p>
+            </field>
+        </record>
+
+        <record id="action_customer_tag_tree1_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="customer_tag_tree" />
+            <field name="act_window_id" ref="action_customer_tag_tree1" />
+        </record>
+
+
+        <!-- Top menu item -->
+        <menuitem name="ECV Paper" id="ecv_custom.menu_root" />
+
+        <!-- menu categories -->
+        <menuitem name="ECV Paper" id="ecv_custom.menu_1" parent="ecv_custom.menu_root" />
+
+        <!-- actions -->
+        <menuitem name="Tags" id="menu_action_customer_tag_tree1" parent="ecv_custom.menu_1" action="action_customer_tag_tree1" sequence="1" />
+    </data>
+
+</odoo>
